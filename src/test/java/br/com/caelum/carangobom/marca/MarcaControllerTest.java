@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ class MarcaControllerTest {
 
     @Test
     void deveRetornarListaQuandoHouverResultados() {
-        List<Marca> marcas = List.of(
+        List<Marca> marcas = Arrays.asList(
             new Marca(1L, "Audi"),
             new Marca(2L, "BMW"),
             new Marca(3L, "Fiat")
