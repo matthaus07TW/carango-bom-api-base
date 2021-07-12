@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -22,16 +21,14 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public List<ErrorDto> handle(MethodArgumentNotValidException exception) {
-		List<ErrorDto> dto = new ArrayList<>();
+		List<ErrorDto> errors = new ArrayList<>();
 		
-		List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
-		fieldErrors.forEach(fieldError -> {
+		exception.getBindingResult().getFieldErrors().forEach(fieldError -> {
 			String message = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-			ErrorDto errorDto = new ErrorDto(fieldError.getField(), message);
-			dto.add(errorDto);
+			errors.add(new ErrorDto(fieldError.getField(), message));
 		});
 		
-		return dto;
+		return errors;
 	}
 	
 }
