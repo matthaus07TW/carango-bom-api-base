@@ -14,7 +14,11 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -42,12 +46,14 @@ class BrandControllerTest {
 
 	@Test
 	void deveRetornarListaQuandoHouverResultados() {
-		List<Brand> marcas = Arrays.asList(new Brand(1L, "Audi"), new Brand(2L, "BMW"), new Brand(3L, "Fiat"));
+		ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
+		
+		List<Brand> brands = Arrays.asList(new Brand(1L, "Audi"), new Brand(2L, "BMW"), new Brand(3L, "Fiat"));
+		
+		when(brandRepository.findAll(pageableCaptor.capture())).thenReturn(new PageImpl<Brand>(brands));
 
-		when(brandRepository.findAll()).thenReturn(marcas);
-
-		List<Brand> resultado = marcaController.find();
-		assertEquals(marcas, resultado);
+		Page<Brand> result = marcaController.find(pageableCaptor.capture());
+		assertEquals(brands, result.getContent());
 	}
 
 	@Test
