@@ -21,67 +21,77 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.caelum.carangobom.config.swagger.ApiPageable;
 import br.com.caelum.carangobom.form.BrandForm;
 import br.com.caelum.carangobom.model.Brand;
 import br.com.caelum.carangobom.repository.BrandRepository;
+import io.swagger.annotations.ApiOperation;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("/brands")
 public class BrandController {
 
-    private BrandRepository brandRepository;
+	private BrandRepository brandRepository;
 
-    @Autowired
-    public BrandController(BrandRepository brandRepository) {
-        this.brandRepository = brandRepository;
-    }
+	@Autowired
+	public BrandController(BrandRepository brandRepository) {
+		this.brandRepository = brandRepository;
+	}
 
-    @GetMapping
-    public Page<Brand> find(@PageableDefault(sort = "name") Pageable pageable) {
-    	Page<Brand> brands = brandRepository.findAll(pageable);
-        return brands;
-    }
+	@ApiOperation(value = "Find Brands")
+	@ApiPageable
+	@GetMapping
+	public Page<Brand> find(@PageableDefault(sort = "name") @ApiIgnore Pageable pageable) {
+		Page<Brand> brands = brandRepository.findAll(pageable);
+		return brands;
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Brand> findById(@PathVariable Long id) {
-        Optional<Brand> brand = brandRepository.findById(id);
-        if (brand.isPresent()) {
-            return ResponseEntity.ok(brand.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+	@ApiOperation(value = "Find Brand")
+	@GetMapping("/{id}")
+	public ResponseEntity<Brand> findById(@PathVariable Long id) {
+		Optional<Brand> brand = brandRepository.findById(id);
+		if (brand.isPresent()) {
+			return ResponseEntity.ok(brand.get());
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity<Brand> create(@Valid @RequestBody BrandForm form, UriComponentsBuilder uriBuilder) {
-        Brand brand = form.convert(new Brand());
-    	Brand brandCreated = brandRepository.save(brand);
-        URI uri = uriBuilder.path("/brands/{id}").buildAndExpand(brandCreated.getId()).toUri();
-        return ResponseEntity.created(uri).body(brandCreated);
-    }
+	@ApiOperation(value = "Create Brand")
+	@PostMapping
+	@Transactional
+	public ResponseEntity<Brand> create(@Valid @RequestBody BrandForm form, UriComponentsBuilder uriBuilder) {
+		Brand brand = form.convert(new Brand());
+		Brand brandCreated = brandRepository.save(brand);
+		URI uri = uriBuilder.path("/brands/{id}").buildAndExpand(brandCreated.getId()).toUri();
+		return ResponseEntity.created(uri).body(brandCreated);
+	}
 
-    @PutMapping("/{id}")
-    @Transactional
-    public ResponseEntity<Brand> update(@PathVariable Long id, @Valid @RequestBody BrandForm form) {
-        Optional<Brand> brand = brandRepository.findById(id);
-        if (brand.isPresent()) {
-            Brand brandUpdated = form.convert(brand.get());
-            return ResponseEntity.ok(brandUpdated);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+	@ApiOperation(value = "Update Brand")
+	@PutMapping("/{id}")
+	@Transactional
+	public ResponseEntity<Brand> update(@PathVariable Long id, @Valid @RequestBody BrandForm form) {
+		Optional<Brand> brand = brandRepository.findById(id);
+		if (brand.isPresent()) {
+			Brand brandUpdated = form.convert(brand.get());
+			return ResponseEntity.ok(brandUpdated);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<Brand> delete(@PathVariable Long id) {
-        Optional<Brand> brand = brandRepository.findById(id);
-        if (brand.isPresent()) {
-            brandRepository.delete(brand.get());
-            return ResponseEntity.ok(brand.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+	@ApiOperation(value = "Delete Brand")
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity<Brand> delete(@PathVariable Long id) {
+		Optional<Brand> brand = brandRepository.findById(id);
+		if (brand.isPresent()) {
+			brandRepository.delete(brand.get());
+			return ResponseEntity.ok(brand.get());
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
 }
