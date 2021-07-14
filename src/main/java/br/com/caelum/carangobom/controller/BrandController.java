@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiOperation;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
+@Transactional
 @RequestMapping("/brands")
 public class BrandController {
 
@@ -60,7 +61,6 @@ public class BrandController {
 
 	@ApiOperation(value = "Create Brand")
 	@PostMapping
-	@Transactional
 	public ResponseEntity<Brand> create(@Valid @RequestBody BrandForm form, UriComponentsBuilder uriBuilder) {
 		Brand brand = form.convert(new Brand());
 		Brand brandCreated = brandRepository.save(brand);
@@ -70,7 +70,6 @@ public class BrandController {
 
 	@ApiOperation(value = "Update Brand")
 	@PutMapping("/{id}")
-	@Transactional
 	public ResponseEntity<Brand> update(@PathVariable Long id, @Valid @RequestBody BrandForm form) {
 		Optional<Brand> brand = brandRepository.findById(id);
 		if (brand.isPresent()) {
@@ -83,7 +82,6 @@ public class BrandController {
 
 	@ApiOperation(value = "Delete Brand")
 	@DeleteMapping("/{id}")
-	@Transactional
 	public ResponseEntity<Brand> delete(@PathVariable Long id) {
 		Optional<Brand> brand = brandRepository.findById(id);
 		if (brand.isPresent()) {

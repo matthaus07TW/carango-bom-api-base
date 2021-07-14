@@ -1,22 +1,13 @@
 package br.com.caelum.carangobom.config.validator;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class ErrorDto {
 
 	private String field;
 	private String message;
-
-	public ErrorDto(String field, String message) {
-		super();
-		this.field = field;
-		this.message = message;
-	}
-
-	public String getField() {
-		return field;
-	}
-
-	public String getMessage() {
-		return message;
-	}
 
 }

@@ -6,14 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Brand {
 
 	@Id
@@ -24,11 +24,6 @@ public class Brand {
 
 	public Brand(String nome) {
 		this(null, nome);
-	}
-
-	public Brand(Long id, String nome) {
-		this.id = id;
-		this.name = nome;
 	}
 
 }
