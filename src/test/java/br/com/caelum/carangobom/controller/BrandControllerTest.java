@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.marca;
+package br.com.caelum.carangobom.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,7 +23,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.caelum.carangobom.controller.BrandController;
 import br.com.caelum.carangobom.form.BrandForm;
 import br.com.caelum.carangobom.model.Brand;
 import br.com.caelum.carangobom.repository.BrandRepository;

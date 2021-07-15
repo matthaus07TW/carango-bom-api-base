@@ -4,26 +4,27 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import br.com.caelum.carangobom.model.Brand;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class BrandForm {
 
 	@NotBlank
 	@Size(min = 2, message = "Deve ter {min} ou mais caracteres.")
 	private String name;
 
-	public Brand convert(Brand brand) {
+	public Brand convert() {
+		Brand brand = new Brand();
 		brand.setName(name);
 		return brand;
 	}
-
-	public BrandForm(@NotBlank @Size(min = 2, message = "Deve ter {min} ou mais caracteres.") String name) {
-		super();
-		this.name = name;
+	
+	public Brand updateName(Brand brand) {
+		brand.setName(name);
+		return brand;
 	}
 }

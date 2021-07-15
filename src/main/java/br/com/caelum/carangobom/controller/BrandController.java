@@ -54,15 +54,15 @@ public class BrandController {
 		Optional<Brand> brand = brandRepository.findById(id);
 		if (brand.isPresent()) {
 			return ResponseEntity.ok(brand.get());
-		} else {
-			return ResponseEntity.notFound().build();
 		}
+		
+		return ResponseEntity.notFound().build();
 	}
 
 	@ApiOperation(value = "Create Brand")
 	@PostMapping
 	public ResponseEntity<Brand> create(@Valid @RequestBody BrandForm form, UriComponentsBuilder uriBuilder) {
-		Brand brand = form.convert(new Brand());
+		Brand brand = form.convert();
 		Brand brandCreated = brandRepository.save(brand);
 		URI uri = uriBuilder.path("/brands/{id}").buildAndExpand(brandCreated.getId()).toUri();
 		return ResponseEntity.created(uri).body(brandCreated);
@@ -73,11 +73,11 @@ public class BrandController {
 	public ResponseEntity<Brand> update(@PathVariable Long id, @Valid @RequestBody BrandForm form) {
 		Optional<Brand> brand = brandRepository.findById(id);
 		if (brand.isPresent()) {
-			Brand brandUpdated = form.convert(brand.get());
+			Brand brandUpdated = form.updateName(brand.get());
 			return ResponseEntity.ok(brandUpdated);
-		} else {
-			return ResponseEntity.notFound().build();
 		}
+
+		return ResponseEntity.notFound().build();
 	}
 
 	@ApiOperation(value = "Delete Brand")
@@ -87,9 +87,9 @@ public class BrandController {
 		if (brand.isPresent()) {
 			brandRepository.delete(brand.get());
 			return ResponseEntity.ok(brand.get());
-		} else {
-			return ResponseEntity.notFound().build();
 		}
+
+		return ResponseEntity.notFound().build();
 	}
 
 }
