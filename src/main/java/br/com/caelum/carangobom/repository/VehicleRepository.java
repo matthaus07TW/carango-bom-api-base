@@ -13,6 +13,4 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
 	Page<Vehicle> findAll(Specification<Vehicle> spec, Pageable pageable);
 	
-	Page<Vehicle> findAllByBrandNameAndModel(String brandName, String model, Pageable pageable);
-	
 }
