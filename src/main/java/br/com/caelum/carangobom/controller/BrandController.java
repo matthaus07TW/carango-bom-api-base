@@ -44,8 +44,7 @@ public class BrandController {
 	@ApiPageable
 	@GetMapping
 	public Page<Brand> find(@PageableDefault(sort = "name") @ApiIgnore Pageable pageable) {
-		Page<Brand> brands = brandRepository.findAll(pageable);
-		return brands;
+		return brandRepository.findAll(pageable);
 	}
 
 	@ApiOperation(value = "Find Brand")

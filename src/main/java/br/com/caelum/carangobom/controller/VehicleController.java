@@ -65,8 +65,7 @@ public class VehicleController {
 			vehiclesPage = vehicleRepository.findAll(pageable);
 		}
 		
-		Page<VehicleDto> vehicleDtoPage = vehiclesPage.map(VehicleDto::new);
-		return vehicleDtoPage;
+		return vehiclesPage.map(VehicleDto::new);
 	}
 
 	@ApiOperation(value = "Find Vehicle")
