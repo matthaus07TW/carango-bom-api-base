@@ -54,7 +54,8 @@ public class VehicleController {
 	@GetMapping
 	public Page<VehicleDto> find(
 			@And({ @Spec(path = "brand.name", params = "brandName", spec = Like.class),
-					@Spec(path = "model", spec = Like.class) }) Specification<Vehicle> spec,
+					@Spec(path = "model", spec = Like.class)
+			}) Specification<Vehicle> spec,
 			@PageableDefault(sort = "model") @ApiIgnore Pageable pageable) {
 		Page<Vehicle> vehiclesPage;
 		
