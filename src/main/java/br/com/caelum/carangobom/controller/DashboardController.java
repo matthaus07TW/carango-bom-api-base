@@ -2,6 +2,7 @@ package br.com.caelum.carangobom.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +16,8 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/dashboard")
 public class DashboardController {
 
+	@Autowired
 	private DashboardRepository dashboardRepository;
-
-	public DashboardController(DashboardRepository dashboardRepository) {
-		this.dashboardRepository = dashboardRepository;
-	}
 	
 	@GetMapping
 	@ApiOperation(value = "Find Vehicles by brand")
