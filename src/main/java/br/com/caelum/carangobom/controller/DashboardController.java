@@ -21,7 +21,7 @@ public class DashboardController {
 	
 	@GetMapping
 	@ApiOperation(value = "Find Vehicles by brand")
-	public ResponseEntity<?> find() {
+	public ResponseEntity<List<Dashboard>> find() {
 		List<Dashboard> dashboardInfos = dashboardRepository.mappDashboardInfosByBrand();
 		return ResponseEntity.ok(dashboardInfos);
 	}
