@@ -12,5 +12,5 @@ import br.com.caelum.carangobom.model.Vehicle;
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
 	Page<Vehicle> findAll(Specification<Vehicle> spec, Pageable pageable);
-	
+
 }

@@ -12,7 +12,7 @@ public class VehicleDto {
 
 	private Long id;
 
-	private String brand;
+	private Long brandId;
 	
 	private String model;
 	
@@ -22,7 +22,7 @@ public class VehicleDto {
 	
 	public VehicleDto(Vehicle vehicle) {
 		this.id = vehicle.getId();
-		this.brand = vehicle.getBrand().getName();
+		this.brandId = vehicle.getBrand().getId();
 		this.model = vehicle.getModel();
 		this.year = vehicle.getYear();
 		this.value = vehicle.getValue();
