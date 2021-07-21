@@ -54,10 +54,10 @@ class VehicleControllerTest {
 	void shouldReturnVehicleList() {
 		ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
 
-		VehicleDto vehicleTestDto = new VehicleDto(1L, 1L, "HB20", 2021, BigDecimal.TEN);
+		Brand brandTest = new Brand(1L, "HYUNDAI");
+		VehicleDto vehicleTestDto = new VehicleDto(1L, brandTest, "HB20", 2021, BigDecimal.TEN);
 		List<VehicleDto> vehiclesDto = Arrays.asList(vehicleTestDto);
 
-		Brand brandTest = new Brand(1L, "HYUNDAI");
 		Vehicle vehicleTest = new Vehicle(1L, brandTest, "HB20", 2021, BigDecimal.TEN);
 		List<Vehicle> vehicles = Arrays.asList(vehicleTest);
 
@@ -71,7 +71,7 @@ class VehicleControllerTest {
 	void shouldReturnVehicleById() {
 		Brand brandTest = new Brand(1L, "HYUNDAI");
 		Vehicle vehicleTest = new Vehicle(1L, brandTest, "HB20", 2021, BigDecimal.TEN);
-		VehicleDto vehicleTestDto = new VehicleDto(1L, 1L, "HB20", 2021, BigDecimal.TEN);
+		VehicleDto vehicleTestDto = new VehicleDto(1L, brandTest, "HB20", 2021, BigDecimal.TEN);
 
 		when(vehicleRepository.findById(1L)).thenReturn(Optional.of(vehicleTest));
 
@@ -119,7 +119,7 @@ class VehicleControllerTest {
 	void shouldUpdateVehicleIfExists() {
 		Brand brandTest = new Brand(1L, "HYUNDAI");
 		Vehicle vehicleTest = new Vehicle(1L, brandTest, "HB20", 2021, BigDecimal.TEN);
-		VehicleDto vehicleTestDto = new VehicleDto(1L, 1L, "HB20 (updated)", 2021, BigDecimal.TEN);
+		VehicleDto vehicleTestDto = new VehicleDto(1L, brandTest, "HB20 (updated)", 2021, BigDecimal.TEN);
 		VehicleForm vehicleFormTest = new VehicleForm(1L, "HB20 (updated)", 2021, BigDecimal.TEN);
 
 		when(vehicleRepository.findById(1L)).thenReturn(Optional.of(vehicleTest));

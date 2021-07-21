@@ -2,6 +2,7 @@ package br.com.caelum.carangobom.dto;
 
 import java.math.BigDecimal;
 
+import br.com.caelum.carangobom.model.Brand;
 import br.com.caelum.carangobom.model.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ public class VehicleDto {
 
 	private Long id;
 
-	private Long brandId;
+	private Brand brand;
 	
 	private String model;
 	
@@ -22,7 +23,7 @@ public class VehicleDto {
 	
 	public VehicleDto(Vehicle vehicle) {
 		this.id = vehicle.getId();
-		this.brandId = vehicle.getBrand().getId();
+		this.brand = vehicle.getBrand();
 		this.model = vehicle.getModel();
 		this.year = vehicle.getYear();
 		this.value = vehicle.getValue();
