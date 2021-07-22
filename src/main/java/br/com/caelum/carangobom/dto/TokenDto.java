@@ -1,5 +1,8 @@
 package br.com.caelum.carangobom.dto;
 
+import lombok.Getter;
+
+@Getter
 public class TokenDto {
 
 	private String token;
@@ -8,14 +11,6 @@ public class TokenDto {
 	public TokenDto(String token, String type) {
 		this.token = token;
 		this.type = type;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 }

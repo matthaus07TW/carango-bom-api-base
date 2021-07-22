@@ -11,8 +11,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import lombok.Getter;
+
 
 @Entity(name = "account")
+@Getter
 public class User implements UserDetails{
 	
 	private static final long serialVersionUID = 1L;
@@ -26,11 +29,6 @@ public class User implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return null;
 	}
-	
-	public Long getId() {
-		return id;
-	}
-
 
 	public void setId(Long id) {
 		this.id = id;
@@ -42,16 +40,6 @@ public class User implements UserDetails{
 
 	public void setPassword(String password) {
 		this.password = new BCryptPasswordEncoder().encode(password);
-	}
-
-	@Override
-	public String getUsername() {
-		return username;
-	}
-	
-	@Override
-	public String getPassword() {
-		return password;
 	}
 
 	@Override
