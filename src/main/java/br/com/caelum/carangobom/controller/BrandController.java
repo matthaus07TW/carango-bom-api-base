@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -43,12 +45,14 @@ public class BrandController {
 	@ApiOperation(value = "Find Brands")
 	@ApiPageable
 	@GetMapping
+	@Cacheable(value = "brandList")
 	public Page<Brand> find(@PageableDefault(sort = "name") @ApiIgnore Pageable pageable) {
 		return brandRepository.findAll(pageable);
 	}
 
 	@ApiOperation(value = "Find Brand")
 	@GetMapping("/{id}")
+	@Cacheable(value = "brandList")
 	public ResponseEntity<Brand> findById(@PathVariable Long id) {
 		Optional<Brand> brand = brandRepository.findById(id);
 		if (brand.isPresent()) {
@@ -60,6 +64,7 @@ public class BrandController {
 
 	@ApiOperation(value = "Create Brand")
 	@PostMapping
+	@CacheEvict(value = "brandList", allEntries = true )
 	public ResponseEntity<Brand> create(@Valid @RequestBody BrandForm form, UriComponentsBuilder uriBuilder) {
 		Brand brand = form.convert();
 		Brand brandCreated = brandRepository.save(brand);
@@ -69,6 +74,7 @@ public class BrandController {
 
 	@ApiOperation(value = "Update Brand")
 	@PutMapping("/{id}")
+	@CacheEvict(value = "brandList", allEntries = true )
 	public ResponseEntity<Brand> update(@PathVariable Long id, @Valid @RequestBody BrandForm form) {
 		Optional<Brand> brand = brandRepository.findById(id);
 		if (brand.isPresent()) {
@@ -81,6 +87,7 @@ public class BrandController {
 
 	@ApiOperation(value = "Delete Brand")
 	@DeleteMapping("/{id}")
+	@CacheEvict(value = "brandList", allEntries = true )
 	public ResponseEntity<Brand> delete(@PathVariable Long id) {
 		Optional<Brand> brand = brandRepository.findById(id);
 		if (brand.isPresent()) {
