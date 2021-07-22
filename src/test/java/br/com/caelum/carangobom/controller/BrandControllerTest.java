@@ -23,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.caelum.carangobom.dto.BrandDto;
 import br.com.caelum.carangobom.form.BrandForm;
 import br.com.caelum.carangobom.model.Brand;
 import br.com.caelum.carangobom.repository.BrandRepository;
@@ -51,7 +52,7 @@ class BrandControllerTest {
 		
 		when(brandRepository.findAll(pageableCaptor.capture())).thenReturn(new PageImpl<Brand>(brands));
 
-		Page<Brand> result = marcaController.find(pageableCaptor.capture());
+		Page<BrandDto> result = marcaController.find(null,pageableCaptor.capture());
 		assertEquals(brands, result.getContent());
 	}
 
