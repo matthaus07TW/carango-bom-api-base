@@ -1,4 +1,4 @@
-INSERT INTO public.system_user(username, password) VALUES
+INSERT INTO public.account(username, password) VALUES
 ('leo', '$2a$10$sFKmbxbG4ryhwPNx/l3pgOJSt.fW1z6YcUnuE2X8APA/Z3NI/oSpq'),
 ('matthaus', '$2a$10$By4IojTGJfsDSgQFnVZq7.ip50nAFImAau1/Ws9/BVe1eFiIEoKuK'),
 ('renan', '$2a$10$hjF2fHjyMkX0dyBgnJAiUuhyUaf7T/XNKQ/VxkrSt5aSiTVa4bk.2'),

@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
-@Entity(name = "system_user")
+@Entity(name = "account")
 public class User implements UserDetails{
 	
 	private static final long serialVersionUID = 1L;
