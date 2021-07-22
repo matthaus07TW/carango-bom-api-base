@@ -2,7 +2,7 @@ package br.com.caelum.carangobom.interfaces;
 
 import java.math.BigDecimal;
 
-public interface Dashboard {
+public interface VehicleDashboard {
 
 	String getBrandName();
 	

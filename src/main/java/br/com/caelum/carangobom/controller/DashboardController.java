@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.carangobom.interfaces.Dashboard;
-import br.com.caelum.carangobom.repository.DashboardRepository;
+import br.com.caelum.carangobom.interfaces.VehicleDashboard;
+import br.com.caelum.carangobom.repository.VehicleRepository;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -17,12 +17,12 @@ import io.swagger.annotations.ApiOperation;
 public class DashboardController {
 
 	@Autowired
-	private DashboardRepository dashboardRepository;
+	private VehicleRepository vehicleRepository;
 	
 	@GetMapping
 	@ApiOperation(value = "Find Vehicles by brand")
-	public ResponseEntity<List<Dashboard>> find() {
-		List<Dashboard> dashboardInfos = dashboardRepository.mappDashboardInfosByBrand();
+	public ResponseEntity<List<VehicleDashboard>> find() {
+		List<VehicleDashboard> dashboardInfos = vehicleRepository.mapVehicleDashboardByBrand();
 		return ResponseEntity.ok(dashboardInfos);
 	}
 
