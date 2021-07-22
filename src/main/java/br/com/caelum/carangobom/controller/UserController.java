@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,11 +23,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.caelum.carangobom.config.swagger.UserFilterPageable;
 import br.com.caelum.carangobom.dto.UserDto;
 import br.com.caelum.carangobom.form.UserForm;
+import br.com.caelum.carangobom.form.UserUpdateForm;
 import br.com.caelum.carangobom.model.User;
 import br.com.caelum.carangobom.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
+import net.kaczmarzyk.spring.data.jpa.domain.Like;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @Transactional
@@ -41,11 +47,18 @@ public class UserController {
 	}
 
 	@ApiOperation(value = "List Users")
+	@UserFilterPageable
 	@GetMapping
-	public Page<UserDto> find(
-			@PageableDefault(sort = "username", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
-
-		Page<User> usersPage = userRepository.findAll(paginacao);
+	public Page<UserDto> find(@Spec(path = "username", spec = Like.class) Specification<User> spec,
+			@PageableDefault(sort = "username", direction = Direction.ASC, page = 0, size = 10) @ApiIgnore Pageable pagination) {
+		
+		Page<User> usersPage;
+		
+		if (spec != null) {
+			usersPage = userRepository.findAll(spec, pagination);
+		} else {
+			usersPage = userRepository.findAll(pagination);
+		}
 
 		return usersPage.map(UserDto::new);
 	}
@@ -73,7 +86,7 @@ public class UserController {
 
 	@ApiOperation(value = "Update User")
 	@PutMapping("/{id}")
-	public ResponseEntity<UserDto> update(@PathVariable Long id, @Valid @RequestBody UserForm form) {
+	public ResponseEntity<UserDto> update(@PathVariable Long id, @Valid @RequestBody UserUpdateForm form) {
 		Optional<User> user = userRepository.findById(id);
 		if (user.isPresent()) {
 			User updatedUser = form.update(user.get());
