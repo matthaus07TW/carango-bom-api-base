@@ -15,9 +15,9 @@ import io.swagger.annotations.ApiImplicitParams;
             value = "Filter by brand name."),
     @ApiImplicitParam(name = "model", dataType = "string", paramType = "query",
             value = "Filter by vehicle model."),
-    @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+    @ApiImplicitParam(name = "page", dataType = "int", paramType = "query",
             value = "Results page you want to retrieve (0..N)"),
-    @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
+    @ApiImplicitParam(name = "size", dataType = "int", paramType = "query",
             value = "Number of records per page."),
     @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
             value = "Sorting criteria in the format: property(,asc|desc). " +
