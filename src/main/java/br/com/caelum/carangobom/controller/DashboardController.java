@@ -16,14 +16,17 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/dashboard")
 public class DashboardController {
 
-	@Autowired
 	private VehicleRepository vehicleRepository;
+	
+	@Autowired
+	public DashboardController(VehicleRepository vehicleRepository) {
+		this.vehicleRepository = vehicleRepository;
+	}
 	
 	@GetMapping
 	@ApiOperation(value = "Find Vehicles by brand")
-	public ResponseEntity<List<VehicleDashboard>> find() {
-		List<VehicleDashboard> dashboardInfos = vehicleRepository.mapVehicleDashboardByBrand();
-		return ResponseEntity.ok(dashboardInfos);
+	public List<VehicleDashboard> find() {
+		return vehicleRepository.mapVehicleDashboardByBrand();
 	}
 
 }
