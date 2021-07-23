@@ -20,8 +20,7 @@ public class BrandForm {
 	private String name;
 
 	public Brand convert() {
-		Brand brand = new Brand(name);
-		return brand;
+		return new Brand(name);
 	}
 	
 	public Brand updateName(Brand brand) {

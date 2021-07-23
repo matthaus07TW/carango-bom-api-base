@@ -1,5 +1,6 @@
 package br.com.caelum.carangobom.model;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -31,7 +32,7 @@ public class User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return Arrays.asList();
 	}
 
 	public void setId(Long id) {
