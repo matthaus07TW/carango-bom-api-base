@@ -5,9 +5,11 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class LoginForm {
 	
 	@NotNull @NotEmpty

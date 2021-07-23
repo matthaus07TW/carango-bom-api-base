@@ -10,10 +10,12 @@ import javax.validation.constraints.Size;
 import br.com.caelum.carangobom.model.Brand;
 import br.com.caelum.carangobom.model.Vehicle;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class VehicleForm {
