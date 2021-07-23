@@ -31,7 +31,7 @@ class DashboardControllerTest {
 	}
 
 	@Test
-	void test() {
+	void shouldReturnListIfExists() {
 		VehicleDashboardDto vehicleDashboardDto = new VehicleDashboardDto("HYUNDAI", 3, BigDecimal.TEN);
 		
 		when(vehicleRepository.mapVehicleDashboardByBrand()).thenReturn(Arrays.asList(vehicleDashboardDto));
