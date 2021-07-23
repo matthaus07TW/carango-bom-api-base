@@ -12,11 +12,13 @@ import javax.persistence.ManyToOne;
 import br.com.caelum.carangobom.form.VehicleForm;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class Vehicle {
 
