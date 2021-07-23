@@ -48,12 +48,16 @@ class BrandControllerTest {
 	void deveRetornarListaQuandoHouverResultados() {
 		ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
 		
-		List<Brand> brands = Arrays.asList(new Brand(1L, "Audi"), new Brand(2L, "BMW"), new Brand(3L, "Fiat"));
+		Brand brand = new Brand(1L, "Audi");
+		List<Brand> brands = Arrays.asList(brand);
+		
+		BrandDto brandDto = new BrandDto(1L, "Audi");
+		List<BrandDto> brandsDto = Arrays.asList(brandDto);
 		
 		when(brandRepository.findAll(pageableCaptor.capture())).thenReturn(new PageImpl<Brand>(brands));
 
-		Page<BrandDto> result = marcaController.find(null,pageableCaptor.capture());
-		assertEquals(brands, result.getContent());
+		Page<BrandDto> result = marcaController.find(null, pageableCaptor.capture());
+		assertEquals(brandsDto.size(), result.getSize());
 	}
 
 	@Test

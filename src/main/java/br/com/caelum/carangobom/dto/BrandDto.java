@@ -12,6 +12,7 @@ public class BrandDto {
 	private String name;
 	
 	public BrandDto(Brand brand) {
+		id = brand.getId();
 		name = brand.getName();
 	}
 }
