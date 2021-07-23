@@ -22,11 +22,11 @@ public class VehicleDto {
 	private BigDecimal value;
 	
 	public VehicleDto(Vehicle vehicle) {
-		this.id = vehicle.getId();
-		this.brand = vehicle.getBrand();
-		this.model = vehicle.getModel();
-		this.year = vehicle.getYear();
-		this.value = vehicle.getValue();
+		id = vehicle.getId();
+		brand = vehicle.getBrand();
+		model = vehicle.getModel();
+		year = vehicle.getYear();
+		value = vehicle.getValue();
 	}
 	
 }

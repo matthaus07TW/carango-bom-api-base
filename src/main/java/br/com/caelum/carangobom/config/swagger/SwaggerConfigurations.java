@@ -2,6 +2,7 @@ package br.com.caelum.carangobom.config.swagger;
 
 import java.util.Arrays;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.caelum.carangobom.model.User;
@@ -14,8 +15,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SwaggerConfigurations {
-
-	public Docket api() {
+	
+	@Bean
+	public Docket carangoBomApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("br.com.caelum.carangobom"))

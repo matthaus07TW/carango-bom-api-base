@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiImplicitParams;
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @ApiImplicitParams({
+	@ApiImplicitParam(name = "name", dataType = "string", paramType = "query",
+            value = "Filter by brand name."),
     @ApiImplicitParam(name = "page", dataType = "int", paramType = "query",
             value = "Results page you want to retrieve (0..N)"),
     @ApiImplicitParam(name = "size", dataType = "int", paramType = "query",
@@ -20,5 +22,5 @@ import io.swagger.annotations.ApiImplicitParams;
                     "Default sort order is ascending. " +
                     "Multiple sort criteria are supported.")
 })
-public @interface ApiPageable {
+public @interface BrandFilterPageable {
 }

@@ -23,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.caelum.carangobom.dto.BrandDto;
 import br.com.caelum.carangobom.form.BrandForm;
 import br.com.caelum.carangobom.model.Brand;
 import br.com.caelum.carangobom.repository.BrandRepository;
@@ -47,12 +48,16 @@ class BrandControllerTest {
 	void deveRetornarListaQuandoHouverResultados() {
 		ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
 		
-		List<Brand> brands = Arrays.asList(new Brand(1L, "Audi"), new Brand(2L, "BMW"), new Brand(3L, "Fiat"));
+		Brand brand = new Brand(1L, "Audi");
+		List<Brand> brands = Arrays.asList(brand);
+		
+		BrandDto brandDto = new BrandDto(1L, "Audi");
+		List<BrandDto> brandsDto = Arrays.asList(brandDto);
 		
 		when(brandRepository.findAll(pageableCaptor.capture())).thenReturn(new PageImpl<Brand>(brands));
 
-		Page<Brand> result = marcaController.find(pageableCaptor.capture());
-		assertEquals(brands, result.getContent());
+		Page<BrandDto> result = marcaController.find(null, pageableCaptor.capture());
+		assertEquals(brandsDto.size(), result.getSize());
 	}
 
 	@Test
