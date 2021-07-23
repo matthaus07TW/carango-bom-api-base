@@ -52,7 +52,7 @@ public class BrandController {
 	@GetMapping
 	@Cacheable(value = "brandList")
 	public Page<BrandDto> find(@Spec(path = "name", spec = Like.class) Specification<Brand> spec,
-			@PageableDefault(sort = "name", direction = Direction.ASC, page = 0, size = 10) @ApiIgnore Pageable pagination) {
+			@PageableDefault(sort = "name") @ApiIgnore Pageable pagination) {
 
 		Page<Brand> brandsPage;
 

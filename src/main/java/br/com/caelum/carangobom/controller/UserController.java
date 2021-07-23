@@ -50,7 +50,7 @@ public class UserController {
 	@UserFilterPageable
 	@GetMapping
 	public Page<UserDto> find(@Spec(path = "username", spec = Like.class) Specification<User> spec,
-			@PageableDefault(sort = "username", direction = Direction.ASC, page = 0, size = 10) @ApiIgnore Pageable pagination) {
+			@PageableDefault(sort = "username") @ApiIgnore Pageable pagination) {
 		
 		Page<User> usersPage;
 		
