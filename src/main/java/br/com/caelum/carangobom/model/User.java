@@ -11,11 +11,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 
 @Entity(name = "account")
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails{
 	
 	private static final long serialVersionUID = 1L;

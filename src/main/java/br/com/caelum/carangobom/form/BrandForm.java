@@ -18,8 +18,7 @@ public class BrandForm {
 	private String name;
 
 	public Brand convert() {
-		Brand brand = new Brand();
-		brand.setName(name);
+		Brand brand = new Brand(name);
 		return brand;
 	}
 	
