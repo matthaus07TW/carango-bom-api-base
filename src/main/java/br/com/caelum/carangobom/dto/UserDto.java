@@ -8,9 +8,12 @@ import lombok.Getter;
 @Getter
 public class UserDto {
 	
+	private Long id;
+	
 	private String username;
 	
 	public UserDto(User user) {
+		id = user.getId();
 		username = user.getUsername();
 	}
 	
